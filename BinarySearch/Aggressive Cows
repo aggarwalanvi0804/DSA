@@ -1,0 +1,37 @@
+https://www.geeksforgeeks.org/problems/aggressive-cows/1
+
+// User function Template for Java
+class Solution {
+    public static boolean CountNoOfCows(int[] arr, int mid, int k){
+        int first = arr[0];
+        int count = 1;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i] - first >= mid){
+                count++;
+                first = arr[i];
+            }
+            if(count >= k) return true;
+        }
+        if(count>=k) return true;
+        else return false;
+    }
+    public static int solve(int n, int k, int[] stalls) {
+        Arrays.sort(stalls);
+        int max = Integer.MIN_VALUE;
+        for(int stall : stalls){
+            max = Math.max(stall, max);
+        }
+        int low = 1;
+        int high = max;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            boolean find = CountNoOfCows(stalls, mid,k);
+            if(find == true){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return high;
+    }
+}

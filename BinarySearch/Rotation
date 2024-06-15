@@ -1,0 +1,19 @@
+https://www.geeksforgeeks.org/problems/rotation4723/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=rotation
+
+class Solution {
+    int findKRotation(int nums[], int n) {
+        // code here
+        int low = 0;
+        int high = n-1;
+        if(nums[low] <= nums[high]) return low;
+        while(low<high){
+            int mid = low + (high-low)/2;
+            if(nums[mid] >= nums[0]){
+                low = mid+1;
+            }else{
+                high = mid;
+            }
+        }
+        return low;
+    }
+}

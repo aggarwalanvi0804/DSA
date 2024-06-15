@@ -1,0 +1,37 @@
+https://leetcode.com/problems/koko-eating-bananas/
+
+class Solution {
+    public static int calculateTotalHours(int[] piles, int mid){
+        int totalHours = 0;
+        for(int pile : piles){
+            totalHours += Math.ceil((double)pile / (double)mid);
+        }
+        return totalHours;
+    }
+    
+    public int minEatingSpeed(int[] piles, int h) {
+        int max = piles[0];  // Initialize with the first element
+        for(int num : piles){
+            if(num > max){
+                max = num;
+            }
+        }
+        
+        int low = 1;
+        int high = max;
+        
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            int hoursNeeded = calculateTotalHours(piles, mid);
+            
+            if(hoursNeeded <= h){
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        
+        return low;
+    }
+}
+    

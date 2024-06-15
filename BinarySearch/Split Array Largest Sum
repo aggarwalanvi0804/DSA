@@ -1,0 +1,37 @@
+https://leetcode.com/problems/split-array-largest-sum/description/
+
+class Solution {
+    public static int binary(int[] nums, int mid, int k){
+        int count = 1;
+        int a = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] + a <= mid){
+                a+=nums[i];
+            }else{
+                count++;
+                a = nums[i];
+            }
+        }
+        return count;
+    }
+    public int splitArray(int[] nums, int k) {
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for(int num : nums){
+            max = Math.max(max, num);
+            sum+=num;
+        }
+        int low = max;
+        int high = sum;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            int number = binary(nums, mid, k);
+            if(number <= k){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return low;
+    }
+}

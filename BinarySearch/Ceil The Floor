@@ -1,0 +1,36 @@
+https://www.naukri.com/code360/problems/ceiling-in-a-sorted-array_1825401
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int[] getFloorAndCeil(int[] a, int n, int x) {
+      int[] arr = new int[2];
+      int ciel = Integer.MAX_VALUE;
+      int low = 0;
+      int high = n-1;
+      while(low<=high){
+        int mid = low + (high-low)/2;
+        if(a[mid] >= x ){
+          ciel = a[mid];
+          high = mid-1;
+        }else{
+          low = mid+1;
+        } }
+      if(ciel == Integer.MAX_VALUE)
+      arr[1] = -1;
+      else arr[1] = ciel;
+      int floor = -1;
+      int low1 = 0;
+      int high1 = n-1;
+      while(low1<=high1){
+        int mid1 = low1 + (high1-low1)/2;
+        if(a[mid1] <= x){
+          floor = a[mid1];
+          low1 = mid1+1;
+        }else{
+          high1 = mid1-1;
+        } }
+      arr[0] = floor;
+      return arr;
+    }
+}

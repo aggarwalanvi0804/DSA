@@ -1,0 +1,42 @@
+https://www.naukri.com/code360/problems/allocate-books_1090540?utm_source=youtube&utm_medium=affiliate&utm_campaign=codestudio_Striver_BinarySeries&leftPanelTabValue=PROBLEM
+
+import java.util.ArrayList;
+public class Solution {
+    public static int Binary(ArrayList<Integer> arr, int mid){
+        int count = 1;
+        int a = 0;
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i) + a <= mid){
+                a+= arr.get(i);
+            }else{
+                a = arr.get(i);
+                count++;
+            }
+        }
+        return count;
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        // Write your code here.
+        if(n < m) return -1;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int ar : arr){
+            max = Math.max(max, ar);
+            sum = sum + ar;
+        }
+        int low = max;
+        int ans = -1;
+        int high = sum;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            int number = Binary(arr, mid);
+            if(number <= m){
+                high = mid-1;
+                ans = mid;
+            }else{
+                low = mid+1;
+            }
+        }
+        return ans; 
+    }
+}

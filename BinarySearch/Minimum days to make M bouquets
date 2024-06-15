@@ -1,0 +1,48 @@
+https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/
+
+class Solution {
+    public static int binary(int[] arr, int mid, int k){
+        int count = 0;
+        int c = 0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i] <= mid){
+                count++;
+            }else{
+                c+= (count/k);
+                count = 0;
+            }
+        }
+        c+=(count/k);
+        return c;
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int n = bloomDay.length;
+        for(int bloom : bloomDay){
+            if(bloom > max){
+                max = bloom;
+            }
+        }   
+        for(int bloom1 : bloomDay){
+            if(bloom1 < min){
+                min = bloom1;
+            }
+        } 
+        int low = min;
+        int high = max;
+        int res = -1;
+        if(m * k > n) return -1;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            int a = binary(bloomDay, mid,k);
+            if(a >= m){
+                res = mid;
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return res;
+    }
+}

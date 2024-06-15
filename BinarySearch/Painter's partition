@@ -1,0 +1,42 @@
+https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=SUBMISSION
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static int binary(ArrayList<Integer> boards, int mid, int k){
+        int count = 1;
+        int a = 0;
+        for(int i=0;i<boards.size();i++){
+            if(a + boards.get(i) <= mid){
+                a+=boards.get(i);
+            }else{
+                count++;
+                a = boards.get(i);
+            }
+        }
+        return count;
+    }
+    public static int findLargestMinDistance(ArrayList<Integer> boards, int k)
+    {
+        //    Write your code here.
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int board : boards){
+            max = Math.max(max, board);
+            sum+=board;
+        }
+        int low = max;
+        int high = sum;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            int number = binary(boards, mid, k);
+            if(number <= k){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }
+        return low;
+    }
+}

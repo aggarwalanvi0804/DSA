@@ -1,0 +1,19 @@
+https://leetcode.com/problems/reverse-words-in-a-string/description/
+
+class Solution {
+    public String reverseWords(String s) {
+        String str1 = s.trim();
+        String str = str1.replaceAll("\\s+", " ");
+        int j=str.length()-1;
+        StringBuilder sb = new StringBuilder();
+        for(int i=str.length()-1;i>=0;i--){
+            if(str.charAt(i) == ' '){
+                sb.append(str.substring(i+1, j+1));
+                sb.append(' ');
+                j=i-1;
+            }
+        }
+        sb.append(str.substring(0, j+1));
+        return sb.toString();
+    }
+}

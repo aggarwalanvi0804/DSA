@@ -1,0 +1,22 @@
+https://leetcode.com/problems/isomorphic-strings/description/
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            map1.put(s.charAt(i), i);
+        }
+        for(int i=0;i<t.length();i++){
+            map2.put(t.charAt(i), i);
+        }
+        for(int i=0, j=0;i<s.length();i++,j++){
+            int value1 = map1.get(s.charAt(i));
+            int value2 = map2.get(t.charAt(j));
+            if(value1 != value2){
+                return false;
+            }
+        }
+        return true;
+    }
+}

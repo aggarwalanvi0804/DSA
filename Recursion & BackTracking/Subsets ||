@@ -1,0 +1,26 @@
+https://leetcode.com/problems/subsets-ii/description/
+
+class Solution {
+    public static void find(int idx, ArrayList<Integer> list, HashSet<ArrayList<Integer>> set, int n, int[] nums){
+        if(idx == n){
+            set.add(new ArrayList<>(list));
+            return;
+        }
+        for(int i=idx;i<n;i++){
+            if(idx!=i && nums[i] == nums[i-1]) continue;
+        list.add(nums[i]);
+        find(i+1, list, set, n, nums);
+        list.remove(list.size()-1);
+        find(i+1, list,set, n,nums);
+        }
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        HashSet<ArrayList<Integer>> set = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        find(0,list,set,n,nums);
+        List<List<Integer>> f = new ArrayList<>(set);
+        return f; 
+    }
+}

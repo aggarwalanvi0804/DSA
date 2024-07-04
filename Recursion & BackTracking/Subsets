@@ -1,0 +1,27 @@
+https://leetcode.com/problems/subsets/description/
+
+class Solution {
+    public static void find(int[] nums, int n, int idx, ArrayList<Integer> list,HashSet<ArrayList<Integer>> set){
+        if(idx == n){
+            set.add(new ArrayList<>(list));
+            return;
+        }
+        for(int i=idx;i<n;i++){
+            if(idx!=i && nums[i] == nums[i-1]) continue;
+            list.add(nums[idx]);
+            find(nums,n,i+1,list,set);
+            list.remove(list.size()-1);
+            find(nums,n,i+1,list,set);
+        }
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        ArrayList<Integer> list = new ArrayList<>();
+        HashSet<ArrayList<Integer>> set = new HashSet<>();
+        find(nums, n, 0, list,set);
+        List<List<Integer>> finalList = new ArrayList<>(set);
+        return finalList;
+        
+    }
+}

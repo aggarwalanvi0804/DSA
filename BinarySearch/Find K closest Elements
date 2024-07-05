@@ -1,0 +1,47 @@
+https://leetcode.com/problems/find-k-closest-elements/description/
+
+class Solution {
+    public static int floor(int[] arr, int x){
+        int n = arr.length;
+        int ans = 0;
+        int low = 0;
+        int high = arr.length-1;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(arr[mid] == x){
+                return mid;
+            }else if(arr[mid] < x){
+                ans = mid;
+                low = mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int i = floor(arr,x);
+        int j = i+1;
+        while(k>0 && i>=0 && j<arr.length){
+            if(Math.abs(arr[i] - x) <= Math.abs(arr[j]-x)){
+                list.add(arr[i]);
+                k--; i--;
+            }else{
+                list.add(arr[j]);
+                j++; k--;
+            }
+        }
+
+        while(k>0 && i>=0){
+                list.add(arr[i]);
+                k--; i--;
+        }
+        while(k>0 && j<arr.length){
+                list.add(arr[j]);
+                j++; k--;
+        }
+        Collections.sort(list);
+        return list;
+    }
+}

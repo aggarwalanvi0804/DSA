@@ -1,0 +1,29 @@
+https://leetcode.com/problems/combination-sum/description/
+
+class Solution {
+    public static void find(int[] arr, int idx, int target, ArrayList<Integer> list, int n,HashSet<ArrayList<Integer>> finalList){
+            if(idx == n){
+            if(target == 0){
+                finalList.add(new ArrayList<>(list));
+                return;
+            }else{
+                return;
+            }
+            }
+        if(arr[idx] <= target){
+            list.add(arr[idx]);
+            find(arr,idx,target-arr[idx],list,n,finalList);
+            list.remove(list.size()-1);
+        }
+        find(arr,idx+1,target,list,n,finalList);
+    }
+    public List<List<Integer>> combinationSum(int[] arr, int target) {
+        int n = arr.length;
+        HashSet<ArrayList<Integer>> finalList = new HashSet<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        find(arr, 0, target,list,n, finalList);
+        List<List<Integer>> set = new ArrayList<>(finalList);
+        return set;
+
+    }
+}

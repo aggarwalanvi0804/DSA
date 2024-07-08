@@ -1,0 +1,19 @@
+https://leetcode.com/problems/water-bottles/?envType=daily-question&envId=2024-07-07
+
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int max = numBottles;
+        int temp = numBottles;
+        while(numBottles>0){
+            if(numBottles >= numExchange){
+            max = max + numBottles/numExchange;
+            int a = numBottles/numExchange;
+            int b = numBottles%numExchange;
+            numBottles = a+b;
+            }else{
+                break;
+            }
+        }
+        return max;
+    }
+}

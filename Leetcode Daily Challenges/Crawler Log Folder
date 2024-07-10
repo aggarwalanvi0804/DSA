@@ -1,0 +1,28 @@
+Link : https://leetcode.com/problems/crawler-log-folder/description/?envType=daily-question&envId=2024-07-10
+
+# The operations are described below:
+# "../" : Move to the parent folder of the current folder.
+# "./" : Remain in the same folder.
+#"x/" : Move to the child folder named x (This folder is guaranteed to always exist).
+
+class Solution {
+    public int minOperations(String[] logs) {
+        int count = 0;
+        for(int i=0;i<logs.length;i++){
+            if(logs[i].contains("..")){
+                if(count!=0){
+                count--;
+                }else continue;
+            }else if(logs[i].contains(".")){
+                continue;
+            }else{
+                count++;
+            }
+        }
+        if(count < 0) return 0;
+        else return count;
+    }
+}
+
+#T.C - 0(N)
+#S.C - 0(1)

@@ -1,0 +1,39 @@
+https://www.interviewbit.com/problems/sort-array-with-squares/
+
+import java.util.*;
+
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        // Find the minimum value in A
+        int min = Integer.MAX_VALUE;
+        for (int a : A) {
+            min = Math.min(a, min);
+        }
+
+        // Using min to create a list of squared indices
+        int i = 0;
+        int j = A.size() - 1;
+
+        while (i <= j) {
+            if (Math.abs(A.get(i)) < Math.abs(A.get(j))) {
+                list.add(A.get(j) * A.get(j));
+                j--;
+            } else {
+                list.add(A.get(i) * A.get(i));
+                i++;
+            }
+        }
+
+        // Reverse the list to get the correct order
+        Collections.reverse(list);
+        return list;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        ArrayList<Integer> input = new ArrayList<>(Arrays.asList(-4, -1, 0, 3, 10));
+        System.out.println(sol.solve(input)); // Output: [0, 1, 9, 16, 100]
+    }
+}

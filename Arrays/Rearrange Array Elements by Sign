@@ -1,0 +1,40 @@
+Link : https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
+# Medium
+# Array, Two Pointer
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int[] arr = new int[nums.length];
+        int pos = 0;
+        int neg = 0;
+        while(pos<nums.length && neg<nums.length){
+            if(nums[pos]<0){
+                ++pos;
+            }
+            if(nums[neg]>0){
+                ++neg;
+            }
+            if(nums[pos]>0 && nums[neg]<0)
+            break;
+        }
+        int k = 0;
+        while(k<arr.length){
+            if(k%2 == 0){
+                if(nums[pos] > 0){
+                arr[k++] = nums[pos++];
+                }
+            else{
+                pos++;
+            }
+            }
+            if(k%2 != 0){
+                if(nums[neg] < 0){
+                arr[k++] = nums[neg++];
+                }else{
+                    neg++;
+                }
+            }
+        }
+        return arr;
+    }
+}

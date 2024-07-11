@@ -2,6 +2,7 @@ Link : https://leetcode.com/problems/sort-colors/description/
 
 # Medium
 # Topics - Array, Two Pointer, Sorting
+# Dutch National flag Algorithm
 
 class Solution {
     public void sortColors(int[] nums) {

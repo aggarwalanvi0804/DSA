@@ -1,0 +1,29 @@
+Link : https://leetcode.com/problems/sort-colors/description/
+
+# Medium
+# Topics - Array, Two Pointer, Sorting
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int middle = 0;
+        int start = 0;
+        int end = nums.length-1;
+        while(middle<=end){
+            if(nums[middle] == 2){
+                int temp = nums[middle];
+                nums[middle] = nums[end];
+                nums[end] = temp;
+                end--; 
+            }
+            else if(nums[middle] == 0){
+                int temp = nums[middle];
+                nums[middle] = nums[start];
+                nums[start] = temp;
+                start++; middle++;
+            }
+            else{
+                middle++;
+            }
+        }
+    }
+}

@@ -1,0 +1,60 @@
+Link - https://leetcode.com/problems/delete-nodes-and-return-forest/description/?envType=daily-question&envId=2024-07-17
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<TreeNode> res;
+    Set<Integer> delSet;
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        res = new ArrayList();
+        delSet = new HashSet();
+        //put all indexes to delete in to the set
+        for(int delIdx : to_delete)
+            delSet.add(delIdx);
+
+        helper(root, null, true);
+        return res;
+    }
+
+    void helper(TreeNode n, TreeNode parent, boolean isLeft) {
+        //base case - we reached the leaf
+        if (n == null)
+            return;
+        //this is where we need to add the root of the dijoined tree to result
+        if (parent == null && !delSet.contains(n.val)) {
+            res.add(n);
+        }
+        //if we need to delete this node
+        if (delSet.contains(n.val)) {
+            //and we have parent
+            if (parent != null) {
+                //disjoin the tree
+                if (isLeft)
+                    parent.left = null;
+                else
+                    parent.right = null;
+            }
+            //continue recursion
+            helper(n.left, null, true);
+            helper(n.right, null, false);
+        } else {
+            //if we can keep the node - go deeper with recursion, pass node child as current and
+            //current node as parent, do this for left and right children
+            helper(n.left, n, true);
+            helper(n.right, n, false);
+        }
+    }
+}

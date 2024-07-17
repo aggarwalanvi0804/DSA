@@ -1,0 +1,21 @@
+Link - https://www.geeksforgeeks.org/problems/subarray-with-0-sum-1587115621/1
+
+class Solution{
+    //Function to check whether there is a subarray present with 0-sum or not.
+    static boolean findsum(int arr[],int n)
+    {
+        //Your code here
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int preSum = 0;
+        for(int i=0;i<n;i++){
+            preSum+=arr[i];
+            if(preSum == 0) return true;
+            if(map.containsKey(preSum - 0)){
+                return true;
+            }else{
+                map.put(preSum,i);
+            }
+        }
+        return false;
+    }
+}

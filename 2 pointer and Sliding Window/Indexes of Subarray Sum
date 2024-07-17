@@ -1,0 +1,33 @@
+Link - https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1
+
+class Solution {
+    public static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
+        // code here
+        ArrayList<Integer> list = new ArrayList<>();
+        int sum = 0;
+        int i=0;
+        int j=0;
+        while(i<n && j<n){
+            sum = sum + arr[i];
+            if(sum == s){
+                list.add(j+1);
+                list.add(i+1);
+                return list;
+            }else if(sum < s){
+                i++;
+            }else{
+                if(i!=j){
+                sum = sum - arr[j];
+                sum = sum - arr[i];
+                j++;
+                }else{
+                    i++; j++;
+                    sum = 0;
+                }
+            }
+        }
+        ArrayList<Integer> list1 = new ArrayList<>();
+        list1.add(-1);
+        return list1;
+    }
+}

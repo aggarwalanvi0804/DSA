@@ -1,0 +1,22 @@
+Link - https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
+
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n = s.length();
+        int count = 0;
+        int[] lastSeen = new int[3];
+        for(int i=0;i<lastSeen.length;i++){
+            lastSeen[i] = -1;
+        }
+        for(int i=0;i<n;i++){
+            char ch = s.charAt(i); //a
+            int num = ch - 'a';
+            lastSeen[num] = i;
+            if(lastSeen[0] != -1 && lastSeen[1] != -1 && lastSeen[2] != -1){
+                int min1 = Math.min(lastSeen[0], lastSeen[1]);
+                count = count + (1 + Math.min(min1, lastSeen[2]));
+            }
+        }
+        return count;
+    }
+}

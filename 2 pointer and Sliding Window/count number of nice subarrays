@@ -1,0 +1,22 @@
+Link - https://leetcode.com/problems/count-number-of-nice-subarrays/description/
+
+class Solution {
+    public static int find(int[] nums, int k){
+        if(k<0) return 0;
+        int l=0,r=0,sum=0,count=0;
+        while(r<nums.length){
+            sum=sum+(nums[r] % 2);
+            while(sum>k){
+                sum=sum-(nums[l] % 2);
+                l=l+1;
+            }
+            count = count + (r-l+1);
+            r=r+1;
+        }
+        return count;
+    }
+    public int numberOfSubarrays(int[] nums, int k) {
+        int n = nums.length;
+        return find(nums,k) - find(nums,k-1);
+    }
+}
